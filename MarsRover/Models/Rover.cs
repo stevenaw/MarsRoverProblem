@@ -3,7 +3,7 @@
     public class Rover
     {
         public int Id { get; set; }
-        public RoverPosition Position { get; set; }
-        public RoverHeading Heading { get; set; }
+        public Vector Position { get; set; }
+        public Vector Heading { get; set; }
     }
 }

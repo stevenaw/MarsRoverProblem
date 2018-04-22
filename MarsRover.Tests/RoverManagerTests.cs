@@ -31,7 +31,7 @@ namespace MarsRover.Tests
             manager.LandRover(new Rover()
             {
                 Id = 1,
-                Position = new RoverPosition()
+                Position = new Vector()
                 {
                     X = 4,
                     Y = 3
@@ -41,7 +41,7 @@ namespace MarsRover.Tests
             Assert.Throws<InvalidOperationException>(() => manager.LandRover(new Rover()
             {
                 Id = 1,
-                Position = new RoverPosition()
+                Position = new Vector()
                 {
                     X = 5,
                     Y = 8
@@ -59,7 +59,7 @@ namespace MarsRover.Tests
             manager.LandRover(new Rover()
             {
                 Id = 1,
-                Position = new RoverPosition()
+                Position = new Vector()
                 {
                     X = 4,
                     Y = 3
@@ -69,7 +69,7 @@ namespace MarsRover.Tests
             Assert.Throws<InvalidOperationException>(() => manager.LandRover(new Rover()
             {
                 Id = 2,
-                Position = new RoverPosition()
+                Position = new Vector()
                 {
                     X = 4,
                     Y = 3
@@ -86,7 +86,7 @@ namespace MarsRover.Tests
             manager.LandRover(new Rover()
             {
                 Id = 1,
-                Position = new RoverPosition()
+                Position = new Vector()
                 {
                     X = 4,
                     Y = 3
@@ -105,8 +105,12 @@ namespace MarsRover.Tests
             manager.LandRover(new Rover()
             {
                 Id = 1,
-                Heading = RoverHeading.North,
-                Position = new RoverPosition()
+                Heading = new Vector()
+                {
+                    X = 0,
+                    Y = 1
+                },
+                Position = new Vector()
                 {
                     X = 4,
                     Y = 3
@@ -116,8 +120,12 @@ namespace MarsRover.Tests
             manager.LandRover(new Rover()
             {
                 Id = 2,
-                Heading = RoverHeading.North,
-                Position = new RoverPosition()
+                Heading = new Vector()
+                {
+                    X = 0,
+                    Y = 1
+                },
+                Position = new Vector()
                 {
                     X = 4,
                     Y = 4
@@ -136,8 +144,12 @@ namespace MarsRover.Tests
             manager.LandRover(new Rover()
             {
                 Id = 1,
-                Heading = RoverHeading.North,
-                Position = new RoverPosition()
+                Heading = new Vector()
+                {
+                    X = 0,
+                    Y = 1
+                },
+                Position = new Vector()
                 {
                     X = 5,
                     Y = 5

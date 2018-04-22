@@ -23,9 +23,11 @@ namespace MarsRover.Console
                 try
                 {
                     roverService.ExecuteInstructions(fileContents);
+                    
+                    var headingConverter = new HeadingConverter();
 
                     foreach (var rover in roverService.EnumerateRovers())
-                        System.Console.WriteLine(string.Format("Rover{0}:{1} {2} {3}", rover.Id, rover.Position.X, rover.Position.Y, (char)rover.Heading));
+                        System.Console.WriteLine(string.Format("Rover{0}:{1} {2} {3}", rover.Id, rover.Position.X, rover.Position.Y, headingConverter.ToChar(rover.Heading)));
                 }
                 catch (Exception ex)
                 {

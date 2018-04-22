@@ -57,17 +57,19 @@ namespace MarsRover.Tests
 
 
         public static IEnumerable<object[]> ValidLandingData => new List<object[]> {
-            new object[] { "Rover1 Landing:1 2 N", 1, 1, 2, RoverHeading.North },
-            new object[] { "Rover10 Landing:\t11 14 E", 10, 11, 14, RoverHeading.East },
-            new object[] { "Rover4 Landing: 0 0 W", 4, 0, 0, RoverHeading.West },
-            new object[] { "rover10 landing: \t11 4 s \t", 10, 11, 4, RoverHeading.South },
+            new object[] { "Rover1 Landing:1 2 N", 1, 1, 2, HeadingConverter.North },
+            new object[] { "Rover10 Landing:\t11 14 E", 10, 11, 14, HeadingConverter.East },
+            new object[] { "Rover4 Landing: 0 0 W", 4, 0, 0, HeadingConverter.West },
+            new object[] { "rover10 landing: \t11 4 s \t", 10, 11, 4, HeadingConverter.South },
         };
 
         [Theory]
         [MemberData(nameof(ValidLandingData))]
-        public void ParseLanding_ShouldParseValidCoordinates(string input, int id, int x, int y, RoverHeading heading)
+        public void ParseLanding_ShouldParseValidCoordinates(string input, int id, int x, int y, char heading)
         {
             var parser = new RoverParser();
+            var headingConverter = new HeadingConverter();
+
             var results = parser.ParseLanding(input);
 
             Assert.NotNull(results);
@@ -76,7 +78,7 @@ namespace MarsRover.Tests
             Assert.Equal(id, results.Id);
             Assert.Equal(x, results.Position.X);
             Assert.Equal(y, results.Position.Y);
-            Assert.Equal(heading, results.Heading);
+            Assert.Equal(heading, headingConverter.ToChar(results.Heading));
         }
 
 

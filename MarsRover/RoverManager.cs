@@ -40,7 +40,7 @@ namespace MarsRover
             }
             
             foreach (var roverEntry in Rovers.Values)
-                if (RoverPosition.AreEqual(roverEntry.Position, rover.Position))
+                if (Vector.AreEqual(roverEntry.Position, rover.Position))
                     throw new InvalidOperationException("Rover has crash-landed on another rover.");
 
             Rovers.Add(rover.Id, rover);
@@ -60,64 +60,41 @@ namespace MarsRover
             }
             else if (operationType == RoverOperationType.Move)
             {
-                var newPosition = GetNewPosition(rover);
-
+                var newPosition = Vector.Add(rover.Position, rover.Heading);
                 if (newPosition.X < 0 || newPosition.X > PlateauLength || newPosition.Y < 0 || newPosition.Y > PlateauHeight)
                     throw new InvalidOperationException("Rover has driven off the plateau");
 
                 foreach(var roverEntry in Rovers.Values)
-                    if (RoverPosition.AreEqual(roverEntry.Position, newPosition))
+                    if (Vector.AreEqual(roverEntry.Position, newPosition))
                         throw new InvalidOperationException("Collision! Curiousity got the best of this Martian rover");
 
                 rover.Position = newPosition;
             }
         }
 
-        private static RoverPosition GetNewPosition(Rover rover)
+        private static double DegreeToRadian(double angle)
         {
-            var deltaX = 0;
-            var deltaY = 0;
-
-            if (rover.Heading == RoverHeading.North)
-                deltaY = 1;
-            else if (rover.Heading == RoverHeading.South)
-                deltaY = -1;
-            else if (rover.Heading == RoverHeading.East)
-                deltaX = 1;
-            else if (rover.Heading == RoverHeading.West)
-                deltaX = -1;
-
-            return new RoverPosition()
-            {
-                X = rover.Position.X + deltaX,
-                Y = rover.Position.Y + deltaY
-            };
+            return Math.PI * angle / 180.0;
         }
 
-        // Probably better done as a 1-unit vector
-        private static RoverHeading GetNewHeading(RoverHeading heading, RoverOperationType operationType)
+        private static Vector GetNewHeading(Vector heading, RoverOperationType operationType)
         {
             if (operationType != RoverOperationType.RotateLeft && operationType != RoverOperationType.RotateRight)
                 return heading;
 
-            if(heading == RoverHeading.North)
-            {
-                return operationType == RoverOperationType.RotateLeft ? RoverHeading.West : RoverHeading.East;
-            }
-            if (heading == RoverHeading.South)
-            {
-                return operationType == RoverOperationType.RotateLeft ? RoverHeading.East : RoverHeading.West;
-            }
-            if (heading == RoverHeading.East)
-            {
-                return operationType == RoverOperationType.RotateLeft ? RoverHeading.North : RoverHeading.South;
-            }
-            if (heading == RoverHeading.West)
-            {
-                return operationType == RoverOperationType.RotateLeft ? RoverHeading.South : RoverHeading.North;
-            }
+            var theta = DegreeToRadian(operationType == RoverOperationType.RotateRight ? -90 : 90);
 
-            return heading;
+            var cs = Math.Cos(theta);
+            var sn = Math.Sin(theta);
+
+            var newX = heading.X * cs - heading.Y * sn;
+            var newY = heading.X * sn + heading.Y * cs;
+
+            return new Vector()
+            {
+                X = (int)Math.Round(newX),
+                Y = (int)Math.Round(newY)
+            };
         }
     }
 }
