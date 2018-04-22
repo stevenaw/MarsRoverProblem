@@ -61,6 +61,10 @@ namespace MarsRover
             else if (operationType == RoverOperationType.Move)
             {
                 var newPosition = GetNewPosition(rover);
+
+                if (newPosition.X < 0 || newPosition.X > PlateauLength || newPosition.Y < 0 || newPosition.Y > PlateauHeight)
+                    throw new InvalidOperationException("Rover has driven off the plateau");
+
                 foreach(var roverEntry in Rovers.Values)
                     if (RoverPosition.AreEqual(roverEntry.Position, newPosition))
                         throw new InvalidOperationException("Collision! Curiousity got the best of this Martian rover");

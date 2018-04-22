@@ -126,5 +126,25 @@ namespace MarsRover.Tests
 
             Assert.Throws<InvalidOperationException>(() => manager.DirectRover(1, RoverOperationType.Move));
         }
+
+        [Fact]
+        public void DirectRover_WillNotDriveOffPlateau()
+        {
+            var manager = new RoverManager();
+            manager.DiscoverPlateau(5, 5);
+
+            manager.LandRover(new Rover()
+            {
+                Id = 1,
+                Heading = RoverHeading.North,
+                Position = new RoverPosition()
+                {
+                    X = 5,
+                    Y = 5
+                }
+            });
+
+            Assert.Throws<InvalidOperationException>(() => manager.DirectRover(1, RoverOperationType.Move));
+        }
     }
 }
