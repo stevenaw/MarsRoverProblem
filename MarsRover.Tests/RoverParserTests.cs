@@ -18,14 +18,14 @@ namespace MarsRover.Tests
 
         [Theory]
         [MemberData(nameof(ValidInitializationData))]
-        public void ParseInitialization_ShouldParseValidCoordinates(string input, int width, int height)
+        public void ParseInitialization_ShouldParseValidCoordinates(string input, int width, int length)
         {
             var parser = new RoverParser();
             var results = parser.ParseInitialization(input);
 
             Assert.NotNull(results);
             Assert.Equal(width, results.PlateauWidth);
-            Assert.Equal(height, results.PlateauLength);
+            Assert.Equal(length, results.PlateauLength);
         }
 
 
@@ -77,7 +77,7 @@ namespace MarsRover.Tests
 
             Assert.Equal(id, results.Id);
             Assert.Equal(x, results.Position.X);
-            Assert.Equal(y, results.Position.Y);
+            Assert.Equal(y, results.Position.Z);
             Assert.Equal(heading, headingConverter.ToChar(results.Heading));
         }
 

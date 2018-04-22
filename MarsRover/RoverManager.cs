@@ -6,7 +6,7 @@ namespace MarsRover
 {
     public class RoverManager : IRoverManager
     {
-        public int PlateauHeight { get; private set; }
+        public int PlateauWidth { get; private set; }
         public int PlateauLength { get; private set; }
         public Dictionary<int, Rover> Rovers { get; private set; }
 
@@ -23,7 +23,7 @@ namespace MarsRover
             if (length <= 0)
                 throw new InvalidOperationException("Plateau must have real length");
 
-            PlateauHeight = width;
+            PlateauWidth = width;
             PlateauLength = length;
         }
 
@@ -34,7 +34,7 @@ namespace MarsRover
                 throw new InvalidOperationException("Rover already exists.");
             }
 
-            if(rover.Position.X < 0 || rover.Position.X > PlateauLength || rover.Position.Y < 0 || rover.Position.Y > PlateauHeight)
+            if(rover.Position.X < 0 || rover.Position.X > PlateauLength || rover.Position.Z < 0 || rover.Position.Z > PlateauWidth)
             {
                 throw new InvalidOperationException("Rover has landed off the plateau.");
             }
@@ -61,7 +61,7 @@ namespace MarsRover
             else if (operationType == RoverOperationType.Move)
             {
                 var newPosition = Vector.Add(rover.Position, rover.Heading);
-                if (newPosition.X < 0 || newPosition.X > PlateauLength || newPosition.Y < 0 || newPosition.Y > PlateauHeight)
+                if (newPosition.X < 0 || newPosition.X > PlateauLength || newPosition.Z < 0 || newPosition.Z > PlateauWidth)
                     throw new InvalidOperationException("Rover has driven off the plateau");
 
                 foreach(var roverEntry in Rovers.Values)
@@ -87,13 +87,13 @@ namespace MarsRover
             var cs = Math.Cos(theta);
             var sn = Math.Sin(theta);
 
-            var newX = heading.X * cs - heading.Y * sn;
-            var newY = heading.X * sn + heading.Y * cs;
+            var newX = heading.X * cs - heading.Z * sn;
+            var newY = heading.X * sn + heading.Z * cs;
 
             return new Vector()
             {
                 X = (int)Math.Round(newX),
-                Y = (int)Math.Round(newY)
+                Z = (int)Math.Round(newY)
             };
         }
     }

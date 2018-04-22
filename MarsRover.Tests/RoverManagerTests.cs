@@ -34,7 +34,7 @@ namespace MarsRover.Tests
                 Position = new Vector()
                 {
                     X = 4,
-                    Y = 3
+                    Z = 3
                 }
             });
 
@@ -44,7 +44,7 @@ namespace MarsRover.Tests
                 Position = new Vector()
                 {
                     X = 5,
-                    Y = 8
+                    Z = 8
                 }
             }));
         }
@@ -62,7 +62,7 @@ namespace MarsRover.Tests
                 Position = new Vector()
                 {
                     X = 4,
-                    Y = 3
+                    Z = 3
                 }
             });
 
@@ -72,7 +72,7 @@ namespace MarsRover.Tests
                 Position = new Vector()
                 {
                     X = 4,
-                    Y = 3
+                    Z = 3
                 }
             }));
         }
@@ -89,7 +89,7 @@ namespace MarsRover.Tests
                 Position = new Vector()
                 {
                     X = 4,
-                    Y = 3
+                    Z = 3
                 }
             });
 
@@ -108,12 +108,12 @@ namespace MarsRover.Tests
                 Heading = new Vector()
                 {
                     X = 0,
-                    Y = 1
+                    Z = 1
                 },
                 Position = new Vector()
                 {
                     X = 4,
-                    Y = 3
+                    Z = 3
                 }
             });
 
@@ -123,12 +123,12 @@ namespace MarsRover.Tests
                 Heading = new Vector()
                 {
                     X = 0,
-                    Y = 1
+                    Z = 1
                 },
                 Position = new Vector()
                 {
                     X = 4,
-                    Y = 4
+                    Z = 4
                 }
             });
 
@@ -147,12 +147,12 @@ namespace MarsRover.Tests
                 Heading = new Vector()
                 {
                     X = 0,
-                    Y = 1
+                    Z = 1
                 },
                 Position = new Vector()
                 {
                     X = 5,
-                    Y = 5
+                    Z = 5
                 }
             });
 

@@ -12,9 +12,9 @@ namespace MarsRover
 
         public char ToChar(Vector vector)
         {
-            if (vector.Y == 1)
+            if (vector.Z == 1)
                 return North;
-            if (vector.Y == -1)
+            if (vector.Z == -1)
                 return South;
             if (vector.X == 1)
                 return East;
@@ -32,26 +32,26 @@ namespace MarsRover
                     return new Vector()
                     {
                         X = 0,
-                        Y = 1
+                        Z = 1
                     };
                 case South:
                     return new Vector()
                     {
                         X = 0,
-                        Y = -1
+                        Z = -1
                     };
 
                 case East:
                     return new Vector()
                     {
                         X = 1,
-                        Y = 0
+                        Z = 0
                     };
                 case West:
                     return new Vector()
                     {
                         X = -1,
-                        Y = 0
+                        Z = 0
                     };
             }
 

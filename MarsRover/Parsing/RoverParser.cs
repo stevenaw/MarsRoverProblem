@@ -43,7 +43,7 @@ namespace MarsRover.Parsing
                     Position = new Vector()
                     {
                         X = Int32.Parse(result.Groups[2].Value),
-                        Y = Int32.Parse(result.Groups[3].Value)
+                        Z = Int32.Parse(result.Groups[3].Value)
                     },
                     Heading = heading
                 };
